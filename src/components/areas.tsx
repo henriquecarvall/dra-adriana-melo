@@ -27,7 +27,7 @@ export function Areas() {
           <Reveal delay={80}>
             <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-pine-200">
               Cada quadro pede uma investigação diferente. Abaixo, as condições
-              acompanhadas no consultório — se a sua não estiver na lista, vale
+              acompanhadas no consultório. Se a sua não estiver na lista, vale
               conversar mesmo assim.
             </p>
           </Reveal>

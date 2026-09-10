@@ -100,6 +100,17 @@
     background-color: var(--color-clay-400);
   }
 
+  /* Faixa que rola na horizontal no celular, sem barra de rolagem visível. */
+  .u-scroll-x {
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  .u-scroll-x::-webkit-scrollbar {
+    display: none;
+  }
+
   .u-display {
     font-family: var(--font-display);
     font-weight: 400;

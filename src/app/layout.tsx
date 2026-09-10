@@ -18,13 +18,15 @@ const fraunces = Fraunces({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://draadrianamelo.com.br";
 
+const noindex = process.env.NEXT_PUBLIC_NOINDEX === "1";
+
 const description =
-  "Dra. Adriana Melo — alergista e imunologista em Goiânia. Diagnóstico e tratamento de rinite, asma, urticária, dermatite atópica, alergia alimentar e a medicamentos, anafilaxia e imunodeficiências. Adultos e crianças, presencial e por teleconsulta.";
+  "Dra. Adriana Melo, alergista e imunologista em Goiânia. Diagnóstico e tratamento de rinite, asma, urticária, dermatite atópica, alergia alimentar e a medicamentos, anafilaxia e imunodeficiências. Adultos e crianças, presencial e por teleconsulta.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Dra. Adriana Melo — Alergista e Imunologista em Goiânia",
+    default: "Dra. Adriana Melo | Alergista e Imunologista em Goiânia",
     template: "%s · Dra. Adriana Melo",
   },
   description,
@@ -48,19 +50,26 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: siteUrl,
     siteName: site.doctor.name,
-    title: "Dra. Adriana Melo — Alergista e Imunologista em Goiânia",
+    title: "Dra. Adriana Melo | Alergista e Imunologista em Goiânia",
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dra. Adriana Melo — Alergista e Imunologista em Goiânia",
+    title: "Dra. Adriana Melo | Alergista e Imunologista em Goiânia",
     description,
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" },
-  },
+  // Ver comentário em robots.ts: o build de preview sai com noindex.
+  robots: noindex
+    ? {
+        index: false,
+        follow: false,
+        googleBot: { index: false, follow: false },
+      }
+    : {
+        index: true,
+        follow: true,
+        googleBot: { index: true, follow: true, "max-image-preview": "large" },
+      },
 };
 
 export const viewport: Viewport = {
@@ -77,6 +86,7 @@ function StructuredData() {
     medicalSpecialty: ["Allergy", "Immunology"],
     description,
     url: siteUrl,
+    image: `${siteUrl}/images/dra-adriana.webp`,
     telephone: `+${site.contact.whatsappNumber}`,
     areaServed: { "@type": "City", name: "Goiânia" },
     availableService: site.procedures.map((p) => ({
@@ -125,10 +135,17 @@ export default function RootLayout({
   return (
     // As variáveis de fonte ficam em <html>: os tokens --font-display /
     // --font-sans são computados em :root e precisam enxergá-las ali.
-    <html lang="pt-BR" className={`${inter.variable} ${fraunces.variable}`}>
+    // suppressHydrationWarning: o script inline abaixo acrescenta `has-js` ao
+    // <html> antes da hidratação, então o className do cliente diverge do
+    // servidor de propósito.
+    <html
+      lang="pt-BR"
+      className={`${inter.variable} ${fraunces.variable}`}
+      suppressHydrationWarning
+    >
       <head>
-        {/* Sinaliza que as animações de entrada podem rodar. Sem JS — ou sem
-            IntersectionObserver — o conteúdo é renderizado normalmente visível. */}
+        {/* Sinaliza que as animações de entrada podem rodar. Sem JS, ou sem
+            IntersectionObserver, o conteúdo é renderizado normalmente visível. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `if("IntersectionObserver" in window)document.documentElement.classList.add("has-js")`,

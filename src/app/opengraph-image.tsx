@@ -2,9 +2,12 @@ import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
 export const alt =
-  "Dra. Adriana Melo — Alergista e Imunologista em Goiânia";
+  "Dra. Adriana Melo | Alergista e Imunologista em Goiânia";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+/** Necessário com `output: "export"`: a imagem é gerada uma vez, no build. */
+export const dynamic = "force-static";
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -90,8 +93,8 @@ export default function OpengraphImage() {
               fontFamily: "system-ui, sans-serif",
             }}
           >
-            Diagnóstico e tratamento de doenças alérgicas e imunodeficiências —
-            adultos e crianças, em Goiânia e por teleconsulta.
+            Diagnóstico e tratamento de doenças alérgicas e imunodeficiências.
+            Adultos e crianças, em Goiânia e por teleconsulta.
           </div>
         </div>
 

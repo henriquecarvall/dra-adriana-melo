@@ -1,6 +1,6 @@
+import { asset } from "@/lib/base-path";
 import { site } from "@/lib/site";
 import { CheckIcon } from "./icons";
-import { Portrait } from "./portrait";
 import { Reveal } from "./reveal";
 
 export function About() {
@@ -10,13 +10,20 @@ export function About() {
         {/* Visual */}
         <Reveal className="order-2 lg:order-1">
           <div className="relative mx-auto max-w-sm lg:sticky lg:top-28 lg:max-w-none">
-            <div className="overflow-hidden rounded-[1.75rem] border border-pine-200/70 bg-pine-800 shadow-xl shadow-pine-900/10">
-              <Portrait
-                src="/images/consultorio.jpg"
-                alt="Consultório de alergia e imunologia em Goiânia"
-                hint="Opcional: /public/images/consultorio.jpg"
-                className="aspect-[3/4] w-full"
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-pine-200/70 bg-pine-800 shadow-xl shadow-pine-900/10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={asset("/images/dra-adriana-entrevista.webp")}
+                alt={`${site.doctor.name} durante entrevista sobre clima seco e saúde respiratória`}
+                width={1080}
+                height={1440}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[3/4] w-full object-cover"
               />
+              <span className="absolute left-4 top-4 rounded-full bg-bone/95 px-3 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-pine-800 backdrop-blur">
+                Entrevista · Programa Hora da Saúde
+              </span>
             </div>
 
             <figure className="relative -mt-10 ml-6 mr-0 rounded-2xl border border-pine-100 bg-surface p-6 shadow-lg shadow-pine-900/5 sm:ml-10">
@@ -69,7 +76,7 @@ export function About() {
                 Saúde da Faculdade de Medicina da UFG.
               </p>
               <p>
-                No consultório, o atendimento é de adultos e crianças — da rinite que
+                No consultório, o atendimento é de adultos e crianças: da rinite que
                 nunca melhora à urticária que aparece sem explicação, passando por
                 alergia alimentar, reações a medicamentos, anafilaxia e infecções de
                 repetição que podem esconder uma imunodeficiência.

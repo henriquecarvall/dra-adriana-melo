@@ -11,12 +11,12 @@ export const site = {
     tagline: "Alergista e Imunologista",
     crm: "CRM-GO 20791",
     rqe: "RQE 17955",
-    city: "Goiânia — GO",
+    city: "Goiânia, GO",
     // Frase da própria médica (perfil Doctoralia)
     quote:
       "Medicina de precisão, personalizada e de ponta, sem esquecer o lado humano.",
     summary:
-      "Especialista no diagnóstico e tratamento de doenças alérgicas, autoinflamatórias e imunodeficiências — em adultos e crianças.",
+      "Especialista no diagnóstico e tratamento de doenças alérgicas, autoinflamatórias e imunodeficiências, em adultos e crianças.",
   },
 
   contact: {
@@ -33,9 +33,9 @@ export const site = {
     {
       name: "Clínica Allergo",
       address:
-        "Rua João de Abreu, 116 — Ed. EuroWorking Concept, salas 1401/1402",
+        "Rua João de Abreu, 116, Ed. EuroWorking Concept, salas 1401/1402",
       district: "Setor Oeste",
-      city: "Goiânia — GO",
+      city: "Goiânia, GO",
       zip: "74120-110",
       phones: ["(62) 3639-3230", "(62) 99335-4946"],
       maps:
@@ -43,9 +43,9 @@ export const site = {
     },
     {
       name: "Instituto Imuno-Alergo",
-      address: "Av. T-4, 619, sala 1301 — Ed. Buena Vista Office Design",
+      address: "Av. T-4, 619, sala 1301, Ed. Buena Vista Office Design",
       district: "Setor Bueno",
-      city: "Goiânia — GO",
+      city: "Goiânia, GO",
       zip: "74230-035",
       phones: ["(62) 3256-2030"],
       maps:
@@ -54,10 +54,10 @@ export const site = {
   ],
 
   credentials: [
-    { label: "Especialização em Alergia e Imunologia", org: "USP — São Paulo" },
+    { label: "Especialização em Alergia e Imunologia", org: "USP, São Paulo" },
     { label: "Título de Especialista", org: "ASBAI" },
     { label: "Alergia e Imunologia", org: "HC-FMUSP" },
-    { label: "Mestranda em Ciências da Saúde", org: "PPGCS — FM/UFG" },
+    { label: "Mestranda em Ciências da Saúde", org: "PPGCS, FM/UFG" },
     { label: "Docente de Imunologia e Alergia", org: "PUC-GO" },
   ],
 
@@ -94,7 +94,7 @@ export const site = {
     {
       title: "Imunodeficiências",
       detail:
-        "Primárias e secundárias — investigação de infecções que se repetem.",
+        "Primárias e secundárias, com investigação de infecções que se repetem.",
       icon: "shield",
     },
     {
@@ -137,7 +137,7 @@ export const site = {
     {
       title: "Testes de provocação",
       subtitle: "Padrão-ouro do diagnóstico",
-      body: "Considerados o padrão-ouro no diagnóstico em alergia. São indicados quando há dúvida se um alimento ou medicamento realmente causou a reação alérgica — e também para selecionar com segurança alimentos ou medicamentos alternativos.",
+      body: "Considerados o padrão-ouro no diagnóstico em alergia. São indicados quando há dúvida se um alimento ou medicamento realmente causou a reação alérgica, e também para selecionar com segurança alimentos ou medicamentos alternativos.",
       tags: ["Alimentos", "Medicamentos"],
     },
     {
@@ -162,7 +162,7 @@ export const site = {
     {
       step: "03",
       title: "Investigação dirigida",
-      body: "Quando indicado, testes cutâneos, testes de contato ou de provocação confirmam — ou descartam — o gatilho suspeito.",
+      body: "Quando indicado, testes cutâneos, testes de contato ou de provocação confirmam (ou descartam) o gatilho suspeito.",
     },
     {
       step: "04",
@@ -171,25 +171,10 @@ export const site = {
     },
   ],
 
-  highlights: [
-    { label: "Urticária", note: "O que é, por que volta e como controlar." },
-    { label: "Dermatite atópica", note: "Gatilhos do dia a dia e cuidados." },
-    { label: "Alergias", note: "Rinite, asma, alimentos e medicamentos." },
-    { label: "Casos clínicos", note: "Situações reais, explicadas passo a passo." },
-    { label: "Dúvidas", note: "As perguntas que mais chegam no consultório." },
-    { label: "Eventos", note: "Congressos, aulas e atualização científica." },
-  ],
-
-  /**
-   * Publicações do Instagram exibidas na seção de conteúdo.
-   * Para trocar: copie o código da URL do post — instagram.com/p/<CODIGO>/
-   */
-  instagramPosts: ["DEBWigcPXvW"],
-
   faq: [
     {
       q: "Qual a diferença entre alergista e dermatologista para tratar a pele?",
-      a: "O alergista e imunologista investiga a causa imunológica por trás da lesão de pele — o que dispara a urticária, a dermatite atópica ou a dermatite de contato — e trata com testes específicos, controle ambiental, imunobiológicos e imunoterapia quando indicado. Muitas vezes o acompanhamento é conjunto com a dermatologia.",
+      a: "O alergista e imunologista investiga a causa imunológica por trás da lesão de pele (o que dispara a urticária, a dermatite atópica ou a dermatite de contato) e trata com testes específicos, controle ambiental, imunobiológicos e imunoterapia quando indicado. Muitas vezes o acompanhamento é conjunto com a dermatologia.",
     },
     {
       q: "A partir de que idade a criança pode ser atendida?",
@@ -197,7 +182,7 @@ export const site = {
     },
     {
       q: "Preciso suspender antialérgico antes dos testes cutâneos?",
-      a: "Sim. Anti-histamínicos e alguns outros medicamentos interferem no resultado do Prick Test e precisam ser suspensos com antecedência. A orientação exata — quais remédios e por quantos dias — é dada na consulta, antes do agendamento do exame.",
+      a: "Sim. Anti-histamínicos e alguns outros medicamentos interferem no resultado do Prick Test e precisam ser suspensos com antecedência. A orientação exata sobre quais remédios e por quantos dias é dada na consulta, antes do agendamento do exame.",
     },
     {
       q: "A teleconsulta funciona para alergia?",
@@ -209,9 +194,32 @@ export const site = {
     },
     {
       q: "A imunoterapia (vacina de alergia) realmente funciona?",
-      a: "A imunoterapia com alérgenos é o único tratamento capaz de modificar a história natural da doença alérgica, e não apenas controlar sintomas. A indicação é individual e depende do diagnóstico confirmado por testes — por isso a investigação vem sempre antes.",
+      a: "A imunoterapia com alérgenos é o único tratamento capaz de modificar a história natural da doença alérgica, e não apenas controlar sintomas. A indicação é individual e depende do diagnóstico confirmado por testes. Por isso a investigação vem sempre antes.",
     },
   ],
+
+  /**
+   * Assinatura da agência que fez o site, exibida no fim do rodapé.
+   * Tem identidade visual própria (ver `AgencyCredit` em footer.tsx) para
+   * não se confundir com a marca da médica.
+   */
+  agency: {
+    name: "Vértice",
+    eyebrow: "Este site foi criado pela",
+    headline: "Seu negócio merece um site desse nível.",
+    pitch:
+      "A Vértice desenha e programa sites, aplicativos e sistemas sob medida. Estratégia, design e código na mesma casa. Nada de template pronto.",
+    perks: [
+      "No ar em semanas, não em meses",
+      "Feito para o celular, onde o cliente está",
+      "Encontrável no Google por quem já procura você",
+    ],
+    cta: "Quero um orçamento",
+    note: "Resposta no mesmo dia. Orçamento sem compromisso.",
+    whatsappNumber: "5562997008813",
+    whatsappMessage:
+      "Olá! Vi o site da Dra. Adriana Melo e quero um orçamento para o meu negócio.",
+  },
 
   nav: [
     { label: "Sobre", href: "#sobre" },
@@ -226,3 +234,7 @@ export const site = {
 export const whatsappUrl = `https://wa.me/${
   site.contact.whatsappNumber
 }?text=${encodeURIComponent(site.contact.whatsappMessage)}`;
+
+export const agencyWhatsappUrl = `https://wa.me/${
+  site.agency.whatsappNumber
+}?text=${encodeURIComponent(site.agency.whatsappMessage)}`;

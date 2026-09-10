@@ -1,6 +1,6 @@
+import { asset } from "@/lib/base-path";
 import { site, whatsappUrl } from "@/lib/site";
 import { ArrowIcon, PinIcon, StarIcon, VideoIcon, WhatsAppIcon } from "./icons";
-import { Portrait } from "./portrait";
 import { Reveal } from "./reveal";
 
 export function Hero() {
@@ -45,7 +45,7 @@ export function Hero() {
           <Reveal delay={160}>
             <p className="mt-7 text-pretty text-[1.0625rem] leading-relaxed text-ink-soft">
               {site.doctor.summary} Investigação criteriosa com testes
-              específicos, conduta individualizada e acompanhamento próximo —
+              específicos, conduta individualizada e acompanhamento próximo,
               em Goiânia ou por teleconsulta.
             </p>
           </Reveal>
@@ -97,11 +97,15 @@ export function Hero() {
             />
 
             <div className="relative overflow-hidden rounded-[2rem] bg-pine-800 shadow-2xl shadow-pine-900/20">
-              <Portrait
-                src="/images/dra-adriana.jpg"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={asset("/images/dra-adriana.webp")}
                 alt={`Retrato de ${site.doctor.name}, alergista e imunologista em Goiânia`}
-                hint="Adicione a foto em /public/images/dra-adriana.jpg"
-                className="aspect-[4/5] w-full"
+                width={675}
+                height={844}
+                fetchPriority="high"
+                decoding="async"
+                className="aspect-[4/5] w-full object-cover"
               />
               <div
                 className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-pine-950/70 to-transparent"
@@ -117,7 +121,7 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Cartão flutuante — avaliação */}
+            {/* Cartão flutuante: avaliação */}
             <a
               href={site.contact.doctoralia}
               target="_blank"
@@ -136,11 +140,11 @@ export function Hero() {
               </div>
             </a>
 
-            {/* Cartão flutuante — modalidades */}
+            {/* Cartão flutuante: modalidades */}
             <div className="absolute -right-2 top-8 hidden flex-col gap-2.5 rounded-2xl border border-pine-100 bg-surface/95 px-4 py-3.5 shadow-xl shadow-pine-900/10 backdrop-blur sm:flex lg:-right-6">
               <span className="flex items-center gap-2 text-[0.75rem] font-medium text-ink-soft">
                 <PinIcon className="size-4 text-pine-600" />
-                Goiânia — GO
+                Goiânia, GO
               </span>
               <span className="flex items-center gap-2 text-[0.75rem] font-medium text-ink-soft">
                 <VideoIcon className="size-4 text-pine-600" />

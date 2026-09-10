@@ -1,4 +1,4 @@
-# Dra. Adriana Melo — Alergista e Imunologista
+# Dra. Adriana Melo | Alergista e Imunologista
 
 Landing page de captação para a Dra. Adriana Melo (CRM-GO 20791 · RQE 17955),
 alergista e imunologista em Goiânia.
@@ -11,9 +11,9 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · TypeScript.
 
 ```bash
 npm install
-npm run dev     # http://localhost:3000
-npm run build   # build de produção
-npm run start   # servir o build
+npm run dev       # http://localhost:3000
+npm run build     # gera ./out (site estático)
+npm run preview   # serve o ./out
 ```
 
 ---
@@ -21,7 +21,7 @@ npm run start   # servir o build
 ## Onde editar o conteúdo
 
 **Praticamente tudo vive em um arquivo só: [`src/lib/site.ts`](src/lib/site.ts).**
-Textos, telefones, endereços, áreas de atuação, procedimentos, FAQ e links —
+Textos, telefones, endereços, áreas de atuação, procedimentos, FAQ e links:
 tudo é lido de lá pelas seções. Não é preciso mexer nos componentes para
 atualizar informação.
 
@@ -33,50 +33,91 @@ atualizar informação.
 | Áreas de atuação | `site.areas` |
 | Procedimentos (Prick, Patch, provocação, dessensibilização) | `site.procedures` |
 | Perguntas frequentes | `site.faq` |
-| Posts do Instagram exibidos | `site.instagramPosts` |
+| Publicações do Instagram exibidas | `src/lib/posts.ts` |
+| Assinatura da agência no rodapé (Vértice + WhatsApp) | `site.agency` |
 
 ### Fotos
 
-Coloque os arquivos em `public/images/` com estes nomes exatos:
+Todas em `public/images/`, extraídas do material do Instagram e recortadas:
 
-- `public/images/dra-adriana.jpg` — retrato do hero (proporção **4:5**, ex. 1200×1500)
-- `public/images/consultorio.jpg` — foto do consultório na seção "Sobre" (proporção **3:4**)
+| Arquivo | Onde aparece | Origem |
+| --- | --- | --- |
+| `dra-adriana.webp` | Hero, 4:5 (675×844) | Retrato de jaleco do post `DW1BJaujNEK` |
+| `dra-adriana-entrevista.webp` | Seção "Sobre", 3:4 (1080×1440) | Frame da entrevista no Programa Hora da Saúde (`DOYYowEjp35`) |
 
-Enquanto os arquivos não existirem, o site mostra um espaço reservado
-elegante com o monograma — nunca uma imagem quebrada. Basta adicionar o
-arquivo e recarregar.
+Não existe foto do consultório no material do Instagram. Por isso a seção
+"Sobre" usa a foto da entrevista, rotulada como tal. Se aparecer uma foto do
+consultório, é só trocar o arquivo e o texto do selo em `about.tsx`.
 
-### Posts do Instagram
+O retrato do hero é o mais fechado que o material permite: à esquerda dele, na
+imagem original, havia uma caixa de texto do post, e abaixo da linha y≈800 o
+cabelo dela encosta na borda, então não dava para ampliar o enquadramento sem
+recorte artificial. Um retrato profissional em alta resolução melhora essa
+seção mais do que qualquer outro ajuste.
 
-Em `site.instagramPosts` vai a **lista de códigos** dos posts, não a URL inteira.
-De `instagram.com/p/DEBWigcPXvW/` o código é `DEBWigcPXvW`:
+### Publicações do Instagram
 
-```ts
-instagramPosts: ["DEBWigcPXvW", "OUTRO_CODIGO", "MAIS_UM"],
-```
+A seção "Conteúdo" mostra 52 publicações reais do perfil, com filtro por tema.
+Os dados vivem em [`src/lib/posts.ts`](src/lib/posts.ts) e as capas em
+`public/images/conteudo/<code>.webp` (720×900, WebP, ~36 KB cada).
 
-Recomendado deixar 3 posts educativos (urticária, dermatite atópica, alergia
-alimentar) em vez do post atual, que é pessoal. Os posts são carregados pelo
-embed oficial do Instagram — se o post for apagado ou o perfil ficar privado,
-o card some sozinho sem quebrar o layout.
+O texto de cada card é a **legenda original do post**, sem as hashtags, e é o
+que dá massa de conteúdo indexável para o Google. Cada card leva para o post
+no Instagram.
+
+Para acrescentar um post:
+
+1. Salve a capa como `public/images/conteudo/<code>.webp` em 720×900.
+   O `code` é o trecho da URL: de `instagram.com/p/DcwCsKyjNkW/` é `DcwCsKyjNkW`.
+2. Acrescente uma entrada em `posts`, escolhendo um `tema` de `postThemes`.
+
+As imagens são **hospedadas no site**, não embutidas via embed do Instagram.
+Foi decisão deliberada: o embed é um iframe pesado, o texto não é indexado
+pelo Google e o card quebra se o post for apagado ou o perfil ficar privado.
+A contrapartida é que o conteúdo não se atualiza sozinho.
+
+> As imagens e legendas são de autoria da Dra. Adriana Melo. Vale ter a
+> autorização dela por escrito para o reuso no site.
 
 ---
 
-## Deploy na Vercel
+## Publicação
+
+O site é 100% estático (`output: "export"` no next.config.ts), então roda em
+qualquer hospedagem de arquivos.
+
+### GitHub Pages (preview atual)
 
 ```bash
-npm i -g vercel     # se ainda não tiver
-vercel              # preview
-vercel --prod       # produção
+npm run build:pages          # gera ./out já com o basePath do repositório
 ```
 
-Depois de apontar o domínio, defina a variável de ambiente para que
-canonical, sitemap e Open Graph usem a URL certa:
+Depois é só publicar o conteúdo de `out/` na branch `gh-pages`.
+
+O Pages serve o site em `/<nome-do-repo>/`, e não na raiz. Por isso o build de
+publicação define `NEXT_PUBLIC_BASE_PATH`, e **todo caminho para /public passa
+por `asset()`** (`src/lib/base-path.ts`). O `basePath` do Next prefixa as rotas
+dele sozinho, mas não prefixa `<img src="/...">` escrito na mão. Se você
+acrescentar uma imagem, use `asset("/images/...")` ou ela quebra no Pages.
+
+O `public/.nojekyll` também é obrigatório: sem ele o Pages roda Jekyll, que
+ignora qualquer pasta começando com `_` e derruba a `_next/` inteira.
+
+Esse build sai com **noindex** (`NEXT_PUBLIC_NOINDEX=1`): a URL do github.io é
+preview, os dados de contato ainda não foram confirmados pela médica e uma URL
+github.io indexada concorreria depois com o domínio próprio.
+
+### Domínio próprio
+
+Aí o site vai na raiz e não precisa de basePath:
 
 ```bash
-vercel env add NEXT_PUBLIC_SITE_URL
-# ex.: https://draadrianamelo.com.br
+NEXT_PUBLIC_SITE_URL=https://draadrianamelo.com.br npm run build
 ```
+
+Publique o `out/` onde preferir. Sem `NEXT_PUBLIC_NOINDEX` o site volta a ser
+indexável e o sitemap volta a ser anunciado no robots.txt.
+
 
 ---
 
@@ -88,7 +129,7 @@ vercel env add NEXT_PUBLIC_SITE_URL
   perfis sociais) e `FAQPage`.
 - Imagem de compartilhamento gerada em `src/app/opengraph-image.tsx`.
 - Rodapé com CRM, RQE e aviso de que o conteúdo é informativo e não substitui
-  consulta médica — alinhado ao Código de Ética Médica e às resoluções do CFM.
+  consulta médica, alinhado ao Código de Ética Médica e às resoluções do CFM.
 - **Sem depoimentos de pacientes no site** por decisão de conformidade: a
   avaliação aparece como link para o perfil no Doctoralia, que é plataforma de
   terceiros.
@@ -106,5 +147,5 @@ vercel env add NEXT_PUBLIC_SITE_URL
 2. **Telefones.** `(62) 3639-3230` e `(62) 99335-4946` vieram do site pessoal;
    `(62) 3256-2030` é o do Instituto Imuno-Alergo. O WhatsApp
    `(62) 98313-3300` veio do link na bio do Instagram.
-3. **Horários de atendimento** não foram encontrados publicamente — se quiser
+3. **Horários de atendimento** não foram encontrados publicamente. Se quiser
    exibir, dá para acrescentar em `site.locations`.
