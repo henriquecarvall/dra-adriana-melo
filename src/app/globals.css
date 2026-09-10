@@ -152,9 +152,31 @@
   transform: none;
 }
 
+/* Rede de segurança: se o bundle não carregar (um caminho errado de asset,
+   uma rede ruim), o IntersectionObserver nunca roda e a página inteira fica
+   invisível, porque a regra acima já escondeu tudo. Depois de 4s o conteúdo
+   aparece sozinho. O prazo é longo o bastante para o reveal normal acontecer
+   primeiro em uso normal. O estado final é o mesmo de `.is-visible`, então
+   quando o JS funciona isto não muda nada na tela. */
+.has-js .reveal {
+  animation: reveal-fallback 0.75s var(--ease-out-soft) 4s forwards;
+}
+
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .has-js .reveal { opacity: 1; transform: none; transition: none; }
+  .has-js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;

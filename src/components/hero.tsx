@@ -11,11 +11,11 @@ export function Hero() {
       <div className="u-container relative grid grid-cols-1 items-center gap-14 pb-20 pt-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-20 lg:pb-28 lg:pt-24">
         {/* ---- Coluna de texto ---- */}
         <div className="min-w-0 max-w-xl">
-          <Reveal>
+          <Reveal immediate>
             <span className="u-eyebrow">{site.doctor.tagline}</span>
           </Reveal>
 
-          <Reveal delay={80}>
+          <Reveal immediate delay={80}>
             <h1 className="u-display mt-6 text-[clamp(2.6rem,7vw,4.35rem)] text-pine-900">
               Descobrir a causa
               <br />
@@ -42,7 +42,7 @@ export function Hero() {
             </h1>
           </Reveal>
 
-          <Reveal delay={160}>
+          <Reveal immediate delay={160}>
             <p className="mt-7 text-pretty text-[1.0625rem] leading-relaxed text-ink-soft">
               {site.doctor.summary} Investigação criteriosa com testes
               específicos, conduta individualizada e acompanhamento próximo,
@@ -50,7 +50,7 @@ export function Hero() {
             </p>
           </Reveal>
 
-          <Reveal delay={240}>
+          <Reveal immediate delay={240}>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
                 href={whatsappUrl}
@@ -74,7 +74,7 @@ export function Hero() {
             </div>
           </Reveal>
 
-          <Reveal delay={320}>
+          <Reveal immediate delay={320}>
             <dl className="mt-11 grid w-full max-w-md grid-cols-3 gap-px overflow-hidden rounded-2xl border border-pine-200/70 bg-pine-200/70">
               <Metric value="7+" label="anos de experiência" />
               <Metric value="USP" label="especialização" />
@@ -84,7 +84,7 @@ export function Hero() {
         </div>
 
         {/* ---- Coluna visual ---- */}
-        <Reveal delay={200} className="relative">
+        <Reveal immediate delay={200} className="relative">
           <div className="relative mx-auto w-full max-w-[26rem] lg:max-w-none">
             {/* moldura decorativa */}
             <div
