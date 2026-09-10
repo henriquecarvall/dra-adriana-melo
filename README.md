@@ -88,11 +88,15 @@ qualquer hospedagem de arquivos.
 
 ### GitHub Pages (preview atual)
 
+No ar em **https://henriquecarvall.github.io/dra-adriana-melo/**
+
 ```bash
-npm run build:pages          # gera ./out já com o basePath do repositório
+npm run deploy    # build + push do ./out para a branch gh-pages
 ```
 
-Depois é só publicar o conteúdo de `out/` na branch `gh-pages`.
+A `main` guarda o código, a `gh-pages` guarda só o build. O `out/` é um
+repositório git separado e descartável, porque o `next build` apaga a pasta
+inteira a cada build. Por isso o push para `gh-pages` é sempre forçado.
 
 O Pages serve o site em `/<nome-do-repo>/`, e não na raiz. Por isso o build de
 publicação define `NEXT_PUBLIC_BASE_PATH`, e **todo caminho para /public passa
