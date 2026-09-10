@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ---- Brand palette -------------------------------------------------- */
+  --color-bone: #faf7f2;
+  --color-bone-deep: #f2ede4;
+  --color-surface: #ffffff;
+
+  --color-pine-950: #0b241e;
+  --color-pine-900: #103128;
+  --color-pine-800: #164034;
+  --color-pine-700: #1d5544;
+  --color-pine-600: #256b56;
+  --color-pine-500: #2f8168;
+  --color-pine-400: #4f9f87;
+  --color-pine-300: #8ec3b1;
+  --color-pine-200: #c3ded5;
+  --color-pine-100: #e2efea;
+  --color-pine-50: #f0f7f4;
+
+  --color-clay-600: #a8562b;
+  --color-clay-500: #c0693a;
+  --color-clay-400: #d08553;
+  --color-clay-200: #eccdb6;
+  --color-clay-100: #f7e9dd;
+
+  --color-ink: #12211d;
+  --color-ink-soft: #3d514b;
+  --color-ink-muted: #6b7d77;
+
+  /* ---- Type ----------------------------------------------------------- */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- Motion --------------------------------------------------------- */
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  * {
+    border-color: color-mix(in oklab, var(--color-pine-200) 60%, transparent);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    /* `clip` (e não `hidden`) evita barra horizontal sem quebrar position: sticky */
+    overflow-x: clip;
+    background-color: var(--color-bone);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-pine-200);
+    color: var(--color-pine-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-pine-600);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .u-container {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .u-container { padding-inline: 2rem; }
+  }
+
+  .u-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-pine-600);
+  }
+
+  .u-eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background-color: var(--color-clay-400);
+  }
+
+  .u-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.06;
+    font-variation-settings: "SOFT" 20, "WONK" 1, "opsz" 40;
+  }
+
+  .u-rule {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      color-mix(in oklab, var(--color-pine-300) 70%, transparent),
+      transparent
+    );
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---- Entrance animation (progressive enhancement) ---------------------
+   O estado inicial só é aplicado quando o JS confirma que vai animar
+   (classe `has-js` no <html>). Sem JS, tudo permanece visível. */
+.has-js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.75s var(--ease-out-soft),
+    transform 0.75s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.has-js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .has-js .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
